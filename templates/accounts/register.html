@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="min-vh-100 d-flex align-items-center justify-content-center"
+     style="background: linear-gradient(135deg,#0f172a,#1e3a5f);">
+  <div class="card" style="width:480px; border-radius:16px;">
+    <div class="card-body p-5">
+      <div class="text-center mb-4">
+        <div style="width:60px;height:60px;background:#22c55e;border-radius:14px;
+                    display:inline-flex;align-items:center;justify-content:center;
+                    font-size:1.5rem;color:#fff;">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <h4 class="mt-3 fw-bold">Create Account</h4>
+        <p class="text-muted small">Urban OD System — Travel Intelligence Platform</p>
+      </div>
+
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="alert alert-danger py-2 small rounded-3">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold small">Username</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+              <i class="fas fa-user text-muted"></i>
+            </span>
+            <input type="text" name="username" class="form-control border-start-0"
+                   placeholder="Choose a username" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold small">Email Address</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+              <i class="fas fa-envelope text-muted"></i>
+            </span>
+            <input type="email" name="email" class="form-control border-start-0"
+                   placeholder="Enter email address" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold small">Password</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+              <i class="fas fa-lock text-muted"></i>
+            </span>
+            <input type="password" name="password1" class="form-control border-start-0"
+                   placeholder="Create password" required>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label fw-semibold small">Confirm Password</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+              <i class="fas fa-lock text-muted"></i>
+            </span>
+            <input type="password" name="password2" class="form-control border-start-0"
+                   placeholder="Confirm password" required>
+          </div>
+        </div>
+
+        <!-- Hidden: always register as user -->
+        <input type="hidden" name="role" value="user">
+
+        <button type="submit" class="btn w-100 py-2 fw-semibold text-white"
+                style="background:#22c55e;border:none;border-radius:8px;">
+          <i class="fas fa-user-plus me-2"></i>Create Account
+        </button>
+      </form>
+
+      <hr class="my-4">
+      <p class="text-center text-muted small mb-0">
+        Already have an account?
+        <a href="{% url 'login' %}" class="text-primary fw-semibold text-decoration-none">
+          Sign in here
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
